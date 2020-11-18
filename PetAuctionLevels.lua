@@ -1,4 +1,5 @@
 -- constants (redeclaring from blizzard)
+-- Interface/AddOns/Blizzard_AuctionHouseUI/Blizzard_AuctionHouseTableBuilder.lua
 local PRICE_DISPLAY_WIDTH = 120;
 local PRICE_DISPLAY_WITH_CHECKMARK_WIDTH = 140;
 local PRICE_DISPLAY_PADDING = 0;
@@ -6,6 +7,7 @@ local BUYOUT_DISPLAY_PADDING = 0;
 local STANDARD_PADDING = 10;
 
 -- override sell list layout
+-- /Interface/AddOns/Blizzard_AuctionHouseUI/Blizzard_AuctionHouseTableBuilder.lua
 function AuctionHouseTableBuilder.GetItemSellListLayout(owner, itemList, isEquipment, isPet)
     local function LayoutItemSellListTableBuilder(tableBuilder)
         tableBuilder:SetHeaderContainer(itemList:GetHeaderContainer());
@@ -40,6 +42,7 @@ function AuctionHouseTableBuilder.GetItemSellListLayout(owner, itemList, isEquip
 end
 
 -- override itemlevel frame data
+-- /Interface/AddOns/Blizzard_AuctionHouseUI/Blizzard_AuctionHouseTableBuilder.lua
 function AuctionHouseTableCellAuctionsItemLevelMixin:Populate(rowData, dataIndex)
     local itemKeyInfo = C_AuctionHouse.GetItemKeyInfo(rowData.itemKey);
     local text = rowData.itemKey.itemLevel;
@@ -61,6 +64,7 @@ function AuctionHouseTableCellAuctionsItemLevelMixin:Populate(rowData, dataIndex
 end
 
 -- remove the dumb warning that pets may vary
+-- Interface/AddOns/Blizzard_AuctionHouseUI/Blizzard_AuctionHouseUtil.lua
 function AuctionHouseUtil.AppendBattlePetVariationLines(tooltip)
     return
 end
