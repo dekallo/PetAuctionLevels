@@ -14,10 +14,7 @@ function AuctionHouseTableBuilder.GetItemSellListLayout(owner, itemList, isEquip
         tableBuilder:SetColumnHeaderOverlap(2);
 
         tableBuilder:AddFixedWidthColumn(owner, PRICE_DISPLAY_PADDING, PRICE_DISPLAY_WIDTH, STANDARD_PADDING, 0, Enum.AuctionHouseSortOrder.Bid, "AuctionHouseTableCellBidTemplate");
-        tableBuilder:AddFixedWidthColumn(owner, BUYOUT_DISPLAY_PADDING, PRICE_DISPLAY_WITH_CHECKMARK_WIDTH, STANDARD_PADDING, 0, Enum.AuctionHouseSortOrder.Buyout, "AuctionHouseTableCellItemBuyoutTemplate");
-
-        local emptyColumn = tableBuilder:AddFillColumn(owner, 0, 1.0, 0, 0, nil, "AuctionHouseTableEmptyTemplate");
-        emptyColumn:SetDisplayUnderPreviousHeader(true);
+        tableBuilder:AddFillColumn(owner, BUYOUT_DISPLAY_PADDING, 1.0, 0, 0, Enum.AuctionHouseSortOrder.Buyout, "AuctionHouseTableCellItemSellBuyoutTemplate");
 
         if isEquipment then
             local socketColumn = tableBuilder:AddFixedWidthColumn(owner, 0, 24, 0, STANDARD_PADDING, nil, "AuctionHouseTableCellExtraInfoTemplate");
@@ -44,6 +41,11 @@ end
 -- override itemlevel frame data
 -- /Interface/AddOns/Blizzard_AuctionHouseUI/Blizzard_AuctionHouseTableBuilder.lua
 function AuctionHouseTableCellAuctionsItemLevelMixin:Populate(rowData, dataIndex)
+    if rowData.isVirtualEntry then
+		self.Text:SetText("");
+		return;
+	end
+
     local itemKeyInfo = C_AuctionHouse.GetItemKeyInfo(rowData.itemKey);
     local text = rowData.itemKey.itemLevel;
     if itemKeyInfo then
