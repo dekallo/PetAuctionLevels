@@ -1,9 +1,11 @@
 ## Interface: 90105
-## Version: 6
+## Version: @project-version@
 ## Author: dekallo
 ## Title: Pet Auction Levels
 ## Notes: Shows pet levels in the results for other auctions when selling pets
 ## LoadOnDemand: 1
 ## LoadWith: Blizzard_AuctionHouseUI
+## X-Curse-Project-ID: 414660
+## X-Wago-ID: BO67eyG3
 
 PetAuctionLevels.lua
