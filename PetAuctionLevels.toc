@@ -7,5 +7,6 @@
 ## LoadWith: Blizzard_AuctionHouseUI
 ## X-Curse-Project-ID: 414660
 ## X-Wago-ID: BO67eyG3
+## X-WoWI-ID: 26182
 
 PetAuctionLevels.lua
