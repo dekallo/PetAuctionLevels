@@ -1,13 +1,12 @@
 -- constants (redeclaring from blizzard)
 -- AddOns/Blizzard_AuctionHouseUI/Blizzard_AuctionHouseTableBuilder.lua
 local PRICE_DISPLAY_WIDTH = 120
-local PRICE_DISPLAY_WITH_CHECKMARK_WIDTH = 140
 local PRICE_DISPLAY_PADDING = 0
 local BUYOUT_DISPLAY_PADDING = 0
 local STANDARD_PADDING = 10
 
 -- globals
-local Enum, C_AuctionHouse, ITEM_QUALITY_COLORS, BAG_ITEM_QUALITY_COLORS = Enum, C_AuctionHouse, ITEM_QUALITY_COLORS, BAG_ITEM_QUALITY_COLORS
+local strsplit, Enum, LinkUtil, C_AuctionHouse, ITEM_QUALITY_COLORS, BAG_ITEM_QUALITY_COLORS = strsplit, Enum, LinkUtil, C_AuctionHouse, ITEM_QUALITY_COLORS, BAG_ITEM_QUALITY_COLORS
 local AuctionHouseUtil, AuctionHouseTableBuilder, AuctionHouseTableCellAuctionsItemLevelMixin = AuctionHouseUtil, AuctionHouseTableBuilder, AuctionHouseTableCellAuctionsItemLevelMixin
 
 -- override sell list layout
@@ -44,7 +43,7 @@ end
 
 -- override itemlevel frame data
 -- AddOns/Blizzard_AuctionHouseUI/Blizzard_AuctionHouseTableBuilder.lua
-function AuctionHouseTableCellAuctionsItemLevelMixin:Populate(rowData, dataIndex)
+function AuctionHouseTableCellAuctionsItemLevelMixin:Populate(rowData)
     if rowData.isVirtualEntry then
 		self.Text:SetText("")
 		return
@@ -56,7 +55,7 @@ function AuctionHouseTableCellAuctionsItemLevelMixin:Populate(rowData, dataIndex
         if (itemKeyInfo.isPet and rowData.itemLink) then
             -- this block takes care of setting the item level frame text for pets
             -- (the default value, rowData.itemKey.itemLevel, is 0 for pets)
-            local linkType, linkOptions, _ = LinkUtil.ExtractLink(rowData.itemLink)
+            local _, linkOptions, _ = LinkUtil.ExtractLink(rowData.itemLink)
             local _, level, breedQuality = strsplit(":", linkOptions)
             local qualityColor = BAG_ITEM_QUALITY_COLORS[tonumber(breedQuality)]
             text = qualityColor:WrapTextInColorCode(level)
@@ -71,6 +70,6 @@ end
 
 -- remove the dumb warning that pets may vary
 -- AddOns/Blizzard_AuctionHouseUI/Blizzard_AuctionHouseUtil.lua
-function AuctionHouseUtil.AppendBattlePetVariationLines(tooltip)
+function AuctionHouseUtil.AppendBattlePetVariationLines()
     return
 end
