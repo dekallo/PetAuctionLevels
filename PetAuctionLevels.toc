@@ -1,11 +1,12 @@
-## Interface: 100206
+## Interface: 100207
 ## Version: @project-version@
 ## Author: dekallo
 ## Title: Pet Auction Levels
-## Notes: Shows pet levels in the results for other auctions when selling pets
+## Notes: Shows pet levels in the results for other auctions when selling pets.
 ## LoadOnDemand: 1
 ## LoadWith: Blizzard_AuctionHouseUI
 ## IconTexture: Interface\AddOns\PetAuctionLevels\icon
+## X-Source: https://github.com/dekallo/PetAuctionLevels
 ## X-Website: https://www.curseforge.com/wow/addons/pet-auction-levels
 ## X-Curse-Project-ID: 414660
 ## X-Wago-ID: BO67eyG3
