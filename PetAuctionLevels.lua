@@ -55,7 +55,7 @@ function AuctionHouseTableCellAuctionsItemLevelMixin:Populate(rowData)
         if (itemKeyInfo.isPet and rowData.itemLink) then
             -- this block takes care of setting the item level frame text for pets
             -- (the default value, rowData.itemKey.itemLevel, is 0 for pets)
-            local _, linkOptions, _ = LinkUtil.ExtractLink(rowData.itemLink)
+            local _, linkOptions = LinkUtil.ExtractLink(rowData.itemLink)
             local _, level, breedQuality = strsplit(":", linkOptions)
             local qualityColor = BAG_ITEM_QUALITY_COLORS[tonumber(breedQuality)]
             text = qualityColor:WrapTextInColorCode(level)
