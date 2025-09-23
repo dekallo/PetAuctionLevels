@@ -81,3 +81,9 @@ end
 function AuctionHouseUtil.AppendBattlePetVariationLines()
     return
 end
+
+-- don't scroll to the beginning after buying an item, just refresh the frame
+-- AddOns\Blizzard_AuctionHouseUI\Shared\Blizzard_AuctionHouseItemList.lua
+AuctionHouseFrame.BrowseResultsFrame.ItemList.Reset = function()
+	AuctionHouseFrame.BrowseResultsFrame.ItemList:RefreshScrollFrame()
+end

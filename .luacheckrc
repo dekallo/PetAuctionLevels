@@ -6,6 +6,7 @@ ignore = {
 }
 globals = {
     "AUCTION_HOUSE_BROWSE_HEADER_PET_LEVEL",
+    "AuctionHouseFrame",
     "AuctionHouseTableBuilder",
     "AuctionHouseTableCellAuctionsItemLevelMixin",
     "AuctionHouseUtil",
