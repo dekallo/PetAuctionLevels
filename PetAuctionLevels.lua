@@ -6,7 +6,7 @@ local BUYOUT_DISPLAY_PADDING = 0
 local STANDARD_PADDING = 10
 
 -- globals
-local strsplit, Enum, LinkUtil, C_AuctionHouse, ITEM_QUALITY_COLORS, BAG_ITEM_QUALITY_COLORS = strsplit, Enum, LinkUtil, C_AuctionHouse, ITEM_QUALITY_COLORS, BAG_ITEM_QUALITY_COLORS
+local strsplit, Enum, LinkUtil, C_AuctionHouse, ColorManager = strsplit, Enum, LinkUtil, C_AuctionHouse, ColorManager
 local AuctionHouseUtil, AuctionHouseTableBuilder, AuctionHouseTableCellAuctionsItemLevelMixin = AuctionHouseUtil, AuctionHouseTableBuilder, AuctionHouseTableCellAuctionsItemLevelMixin
 
 -- override sell list layout
@@ -57,15 +57,23 @@ function AuctionHouseTableCellAuctionsItemLevelMixin:Populate(rowData)
             -- (the default value, rowData.itemKey.itemLevel, is 0 for pets)
             local _, linkOptions = LinkUtil.ExtractLink(rowData.itemLink)
             local _, level, breedQuality = strsplit(":", linkOptions)
-            local qualityColor = BAG_ITEM_QUALITY_COLORS[tonumber(breedQuality)]
-            text = qualityColor:WrapTextInColorCode(level)
-        else
-            local itemQualityColor = ITEM_QUALITY_COLORS[itemKeyInfo.quality]
-            self.Text:SetTextColor(itemQualityColor.color:GetRGB())
+            local qualityColor = ColorManager.GetColorDataForBagItemQuality(tonumber(breedQuality))
+            if qualityColor and qualityColor.wrapTextInColorCode then
+				self.Text:SetText(qualityColor:WrapTextInColorCode(level) or level)
+			else
+				self.Text:SetText(level)
+				if qualityColor then
+					self.Text:SetTextColor(qualityColor.r, qualityColor.g, qualityColor.b)
+				end
+			end
+        else -- non-pet items
+            local colorData = ColorManager.GetColorDataForItemQuality(itemKeyInfo.quality)
+            if colorData then
+                self.Text:SetTextColor(colorData.color:GetRGB())
+		    end
+            self.Text:SetText(text)
         end
     end
-
-    self.Text:SetText(text)
 end
 
 -- remove the dumb warning that pets may vary
